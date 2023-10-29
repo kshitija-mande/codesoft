@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple To-Do List</title>
+  <style>
+    #taskList {
+      list-style: none;
+      padding: 0;
+    }
+
+    #taskList li {
+      display: flex;
+      align-items: center;
+      margin: 5px 0;
+    }
+
+    #taskList li input[type="checkbox"] {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>My To-Do List</h1>
+
+  <input type="text" id="newTask" placeholder="Enter a new task">
+  <button onclick="addTask()">Add Task</button>
+
+  <ul id="taskList"></ul>
+
+  <script>
+    function addTask() {
+      const taskText = document.getElementById('newTask').value;
+      if (taskText.trim() !== '') {
+        const taskList = document.getElementById('taskList');
+        const newTask = document.createElement('li');
+        newTask.innerHTML = `
+          <input type="checkbox">
+          <span>${taskText}</span>
+          <button onclick="removeTask(this)">Remove</button>
+        `;
+        taskList.appendChild(newTask);
+        document.getElementById('newTask').value = '';
+      }
+    }
+
+    function removeTask(button) {
+      const listItem = button.parentElement;
+      listItem.remove();
+    }
+  </script>
+</body>
+</html>
